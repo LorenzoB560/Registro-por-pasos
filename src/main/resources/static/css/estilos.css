@@ -1,0 +1,16 @@
+a img{
+
+    width: 50px;
+    height: auto;
+    opacity: 0.5;
+}
+#datos-personales a img,
+#about a img,
+#services a img,
+#contact a img {
+    opacity: 0.5; /* Reafirmamos la opacidad por defecto */
+}
+
+#datos-personales #personal img {
+    opacity: 1;
+}
