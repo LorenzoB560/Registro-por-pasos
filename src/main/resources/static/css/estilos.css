@@ -4,13 +4,22 @@ a img{
     height: auto;
     opacity: 0.5;
 }
-#datos-personales a img,
-#about a img,
-#services a img,
-#contact a img {
+#body-personales a img,
+#body-profesionales a img,
+#body-bancarios a img,
+#body-resumen a img {
     opacity: 0.5; /* Reafirmamos la opacidad por defecto */
 }
 
-#datos-personales #personal img {
+#body-personales #datos-personales img {
+    opacity: 1;
+}
+#body-profesionales #datos-profesionales img {
+    opacity: 1;
+}
+#body-bancarios #datos-bancarios img {
+    opacity: 1;
+}
+#body-resumen #resumen img {
     opacity: 1;
 }
