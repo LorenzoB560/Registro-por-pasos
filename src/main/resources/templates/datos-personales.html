@@ -32,26 +32,28 @@
         <input type="text" name="apellido" id="apellido"
                th:value="${datos.getApellido() != null ? datos.getApellido() : ''}">
 
-        <label for="fechaNac">Fecha de nacimiento</label>
-        <input type="date" name="fechaNac" id="fechaNac"></input>
+        <label for="fechaNacimiento">Fecha de nacimiento</label>
+        <input type="text" name="fechaNacimiento" id="fechaNacimiento"
+               th:value="${datos.getFechaNacimiento() != null ? datos.getFechaNacimiento() : ''}"></input>
 
-          <p>Género</p>
+          Género
           <div th:each="genero: ${listaGeneros}">
-              <input type="radio" name="generoSeleccionado" th:checked="${datos.getGeneroSeleccionado() == genero.key}"
-                     th:value="${genero.key}" th:id="'genero' + ${genero.key}" />
-              <label th:for="'genero' + ${genero.key}" th:text="${genero.value}"></label>
+              <input type="radio" name="generoSeleccionado"
+                     th:checked="${genero == datos.getGeneroSeleccionado()}"
+                     th:value="${genero}" th:id="${genero}" />
+              <label th:for="${genero}" th:text="${genero}"></label>
           </div>
 
 
-          <label for="nacionalidades">Nacionalidades</label>
-
-          <div></div>
-          <select name="nacionalidades" id="nacionalidades" multiple>
-              <option value="española">Española</option>
-              <option value="francesa">Francesa</option>
-              <option value="italiana">Italiana</option>
-              <option value="portuguesa">Portuguesa</option>
-          </select> <br>
+          <label for="nacionalidadSeleccionada">Nacionalidad</label>
+          <select name="nacionalidadSeleccionada" id="nacionalidadSeleccionada" multiple>
+              <option th:each="nacionalidad: ${listaNacionalidades}"
+                      th:value="${nacionalidad}"
+                      th:text="${nacionalidad}"
+                      th:selected="${datos.getNacionalidadSeleccionada() != null
+                       and datos.getNacionalidadSeleccionada().contains(nacionalidad)}"
+              ></option>
+          </select>
           <button type="submit">Grabar información e ir al paso 2 - Datos profesionales</button>
       </fieldset>
 

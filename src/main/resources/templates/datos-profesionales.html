@@ -25,9 +25,7 @@
             <legend>Datos profesionales</legend>
             <label for="Departamento">Departamento</label>
 
-
             <select name="Departamento" id="Departamento">
-                <option value="" th:selected="${datos.getDepartamento() == null}"></option>
                 <option value="marketing" th:selected="${datos.getDepartamento() != null and datos.getDepartamento() == 'marketing'}">Marketing</option>
                 <option value="ecommerce" th:selected="${datos.getDepartamento() != null and datos.getDepartamento() == 'ecommerce'}">Ecommerce</option>
             </select>

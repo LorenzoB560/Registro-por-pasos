@@ -116,6 +116,16 @@ public class PrincipalController {
         if (sesionVieja.getApellido() != null){
             sesionNueva.setApellido(sesionVieja.getApellido());
         }
+        if (sesionVieja.getFechaNacimiento() != null){
+            sesionNueva.setFechaNacimiento(sesionVieja.getFechaNacimiento());
+        }
+        if (sesionVieja.getGeneroSeleccionado() != null){
+            sesionNueva.setGeneroSeleccionado(sesionVieja.getGeneroSeleccionado());
+        }
+        if (sesionVieja.getNacionalidadSeleccionada() != null){
+            sesionNueva.setNacionalidadSeleccionada(sesionVieja.getNacionalidadSeleccionada());
+        }
+
         if (sesionVieja.getDepartamento() != null){
             sesionNueva.setDepartamento(sesionVieja.getDepartamento());
         }

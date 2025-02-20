@@ -1,37 +1,38 @@
 package com.lbodaszsservidor.registroporpasos.model;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Coleccion {
-    private static Map<String, String> listaGeneros = new HashMap<String, String>();
-    private static Map<String, String> listaNacionalidades = new HashMap<String, String>();
+    private static List<String> listaGeneros = new ArrayList<>();
+    private static List<String> listaNacionalidades = new ArrayList<>();
 
     static {
-        listaGeneros.put("M", "Masculino");
-        listaGeneros.put("F", "Femenino");
-        listaGeneros.put("O", "Otros");
+        listaGeneros.add("Masculino");
+        listaGeneros.add("Femenino");
+        listaGeneros.add("Otros");
 
-        listaNacionalidades.put("española", "Española");
-        listaNacionalidades.put("francesa", "Francesa");
-        listaNacionalidades.put("italiana", "Italiana");
-        listaNacionalidades.put("portuguesa", "Portugesa");
+        listaNacionalidades.add("Española");
+        listaNacionalidades.add("Francesa");
+        listaNacionalidades.add("Italiana");
+        listaNacionalidades.add("Portugesa");
 
     }
 
-    public static Map<String, String> getListaGeneros() {
+    public static List<String> getListaGeneros() {
         return listaGeneros;
     }
 
-    public static void setListaGeneros(Map<String, String> listaGeneros) {
+    public static void setListaGeneros(List<String> listaGeneros) {
         Coleccion.listaGeneros = listaGeneros;
     }
 
-    public static Map<String, String> getListaNacionalidades() {
+    public static List<String> getListaNacionalidades() {
         return listaNacionalidades;
     }
 
-    public static void setListaNacionalidades(Map<String, String> listaNacionalidades) {
+    public static void setListaNacionalidades(List<String> listaNacionalidades) {
         Coleccion.listaNacionalidades = listaNacionalidades;
     }
 }

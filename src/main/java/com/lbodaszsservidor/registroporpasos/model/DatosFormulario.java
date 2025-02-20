@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 
 @AllArgsConstructor
@@ -20,7 +21,7 @@ public class DatosFormulario {
     private String apellido;
     private LocalDate fechaNacimiento;
     private String generoSeleccionado;
-    private String nacionalidadSeleccionada;
+    private List<String> nacionalidadSeleccionada;
 
     // ** PASO 2 - DATOS PROFESIONALES **
     private String departamento;
