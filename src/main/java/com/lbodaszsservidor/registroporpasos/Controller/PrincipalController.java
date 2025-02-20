@@ -1,6 +1,8 @@
 package com.lbodaszsservidor.registroporpasos.Controller;
 
+import com.lbodaszsservidor.registroporpasos.model.Coleccion;
 import com.lbodaszsservidor.registroporpasos.model.DatosFormulario;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class PrincipalController {
 
-
+    @ModelAttribute //Cargo las colecciones una vez para añadirlas al modelo
+    public void adicionColecciones(Model modelo, HttpServletRequest request) {
+        modelo.addAttribute("listaGeneros", Coleccion.getListaGeneros());
+        modelo.addAttribute("listaNacionalidades", Coleccion.getListaNacionalidades());
+    }
 
     @GetMapping("/datos-personales")
     public String datosPersonales(HttpSession sesion, Model model) {

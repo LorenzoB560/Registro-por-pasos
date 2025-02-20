@@ -32,18 +32,27 @@
         <input type="text" name="apellido" id="apellido"
                th:value="${datos.getApellido() != null ? datos.getApellido() : ''}">
 
-        <!--
         <label for="fechaNac">Fecha de nacimiento</label>
         <input type="date" name="fechaNac" id="fechaNac"></input>
-        <p>Género</p>
-        <label for="masculino">Masculino</label>
-        <input type="radio" name="genero" id="masculino" value="masculino"></input>
-        <label for="femenino">Femenino</label>
-        <input type="radio" name="genero" id="femenino" value="femenino"></input>
-        <label for="otro">Otro</label>
-        <input type="radio" name="genero" id="otro" value="otro"></input> -->
 
-          <button type="submit">Enviar</button>
+          <p>Género</p>
+          <div th:each="genero: ${listaGeneros}">
+              <input type="radio" name="generoSeleccionado" th:checked="${datos.getGeneroSeleccionado() == genero.key}"
+                     th:value="${genero.key}" th:id="'genero' + ${genero.key}" />
+              <label th:for="'genero' + ${genero.key}" th:text="${genero.value}"></label>
+          </div>
+
+
+          <label for="nacionalidades">Nacionalidades</label>
+
+          <div></div>
+          <select name="nacionalidades" id="nacionalidades" multiple>
+              <option value="española">Española</option>
+              <option value="francesa">Francesa</option>
+              <option value="italiana">Italiana</option>
+              <option value="portuguesa">Portuguesa</option>
+          </select> <br>
+          <button type="submit">Grabar información e ir al paso 2 - Datos profesionales</button>
       </fieldset>
 
     </form>
