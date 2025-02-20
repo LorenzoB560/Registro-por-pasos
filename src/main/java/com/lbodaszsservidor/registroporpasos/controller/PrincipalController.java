@@ -1,4 +1,4 @@
-package com.lbodaszsservidor.registroporpasos.Controller;
+package com.lbodaszsservidor.registroporpasos.controller;
 
 import com.lbodaszsservidor.registroporpasos.model.Coleccion;
 import com.lbodaszsservidor.registroporpasos.model.DatosFormulario;
@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class PrincipalController {
@@ -18,6 +17,8 @@ public class PrincipalController {
     public void adicionColecciones(Model modelo, HttpServletRequest request) {
         modelo.addAttribute("listaGeneros", Coleccion.getListaGeneros());
         modelo.addAttribute("listaNacionalidades", Coleccion.getListaNacionalidades());
+        modelo.addAttribute("listaDepartamentos", Coleccion.getListaDepartamentos());
+
     }
 
     @GetMapping("/datos-personales")
@@ -41,7 +42,11 @@ public class PrincipalController {
     }
     @PostMapping("/guardar-datos-personales")
     public String guardarDatosPersonales(@ModelAttribute DatosFormulario datosFormulario, HttpSession sesion) {
-        sesion.setAttribute("datos", datosFormulario);
+        DatosFormulario datosAnteriores = (DatosFormulario) sesion.getAttribute("datos");
+
+        actualizarDatos(datosAnteriores, datosFormulario);
+
+        sesion.setAttribute("datos", datosAnteriores);
         return "redirect:/datos-profesionales";
     }
 
@@ -65,7 +70,7 @@ public class PrincipalController {
 
         actualizarDatos(datosAnteriores, datosFormulario);
 
-        sesion.setAttribute("datos", datosFormulario);
+        sesion.setAttribute("datos", datosAnteriores);
         return "redirect:/datos-bancarios";
     }
 
@@ -90,7 +95,7 @@ public class PrincipalController {
 
         actualizarDatos(datosAnteriores, datosFormulario);
 
-        sesion.setAttribute("datos", datosFormulario);
+        sesion.setAttribute("datos", datosAnteriores);
         return "redirect:/resumen";
     }
 
@@ -105,41 +110,40 @@ public class PrincipalController {
 
         model.addAttribute("datos", datosFormulario);
         System.out.println(sesion.getAttribute("datos"));
-        return "resumen";  // No vuelvas a guardar en la sesión
+        return "resumen";
+    }
+
+    @GetMapping("volver-principio")
+    public String volverPrincipio(HttpSession sesion, Model model) {
+        sesion.invalidate();
+        return "redirect:/datos-personales";
     }
 
 
     private void actualizarDatos(DatosFormulario sesionVieja, DatosFormulario sesionNueva) {
-        if (sesionVieja.getNombre() != null){
-            sesionNueva.setNombre(sesionVieja.getNombre());
-        }
-        if (sesionVieja.getApellido() != null){
-            sesionNueva.setApellido(sesionVieja.getApellido());
-        }
-        if (sesionVieja.getFechaNacimiento() != null){
-            sesionNueva.setFechaNacimiento(sesionVieja.getFechaNacimiento());
-        }
-        if (sesionVieja.getGeneroSeleccionado() != null){
-            sesionNueva.setGeneroSeleccionado(sesionVieja.getGeneroSeleccionado());
-        }
-        if (sesionVieja.getNacionalidadSeleccionada() != null){
-            sesionNueva.setNacionalidadSeleccionada(sesionVieja.getNacionalidadSeleccionada());
+        if (sesionVieja == null) {
+            sesionVieja = new DatosFormulario(); // Se crea una nueva instancia si la sesión ha expirado
         }
 
-        if (sesionVieja.getDepartamento() != null){
-            sesionNueva.setDepartamento(sesionVieja.getDepartamento());
-        }
-        if (sesionVieja.getSalario() > 0){
-            sesionNueva.setSalario(sesionVieja.getSalario());
-        }
-        if (sesionVieja.getBancoNombre() != null) {
-            sesionNueva.setBancoNombre(sesionVieja.getBancoNombre());
+        if (sesionNueva == null) {
+            return; // Si no hay nuevos datos, no hacemos nada
         }
 
-        if (sesionVieja.getCuentaBancaria() > 0){
-            sesionNueva.setCuentaBancaria(sesionVieja.getCuentaBancaria());
-        }
+        // Datos personales
+        sesionVieja.setNombre(sesionNueva.getNombre() != null ? sesionNueva.getNombre() : sesionVieja.getNombre());
+        sesionVieja.setApellido(sesionNueva.getApellido() != null ? sesionNueva.getApellido() : sesionVieja.getApellido());
+        sesionVieja.setFechaNacimiento(sesionNueva.getFechaNacimiento() != null ? sesionNueva.getFechaNacimiento() : sesionVieja.getFechaNacimiento());
+        sesionVieja.setGeneroSeleccionado(sesionNueva.getGeneroSeleccionado() != null ? sesionNueva.getGeneroSeleccionado() : sesionVieja.getGeneroSeleccionado());
+        sesionVieja.setNacionalidadSeleccionada(sesionNueva.getNacionalidadSeleccionada() != null ? sesionNueva.getNacionalidadSeleccionada() : sesionVieja.getNacionalidadSeleccionada());
 
+        // Datos profesionales
+        sesionVieja.setDepartamentoSeleccionado(sesionNueva.getDepartamentoSeleccionado() != null ? sesionNueva.getDepartamentoSeleccionado() : sesionVieja.getDepartamentoSeleccionado());
+        sesionVieja.setSalario(sesionNueva.getSalario() > 0 ? sesionNueva.getSalario() : sesionVieja.getSalario());
+        sesionVieja.setComentarios(sesionNueva.getComentarios() != null ? sesionNueva.getComentarios() : sesionVieja.getComentarios());
 
+        // Datos bancarios
+        sesionVieja.setBancoNombre(sesionNueva.getBancoNombre() != null ? sesionNueva.getBancoNombre() : sesionVieja.getBancoNombre());
+        sesionVieja.setCuentaBancaria(sesionNueva.getCuentaBancaria() > 0 ? sesionNueva.getCuentaBancaria() : sesionVieja.getCuentaBancaria());
     }
+
 }

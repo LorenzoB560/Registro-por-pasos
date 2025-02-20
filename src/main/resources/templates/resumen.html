@@ -20,11 +20,31 @@
     <img src="/img/checkered-flag-icon.png" alt="Paso 4"></img>
   </a>
 
-  <p th:text="${datos.getNombre() != null ? datos.getNombre() : ''}"></p>
-  <p th:text="${datos.getGeneroSeleccionado() != null ? datos.getGeneroSeleccionado() : ''}"></p>
-  <p th:text="${datos.getNacionalidadSeleccionada() != null ? datos.getNacionalidadSeleccionada() : ''}"></p>
+  <fieldset>
+    <legend>Datos Personales</legend>
+    <p>Nombre: <span th:text="${datos.getNombre() != null ? datos.getNombre() : ''}"></span></p>
+    <p>Apellido: <span th:text="${datos.getApellido() != null ? datos.getApellido() : ''}"></span></p>
+    <p>Género: <span th:text="${datos.getGeneroSeleccionado() != null ? datos.getGeneroSeleccionado() : ''}"></span></p>
+    <p>Fecha de nacimiento: <span th:text="${datos.getFechaNacimiento() != null ? datos.getFechaNacimiento() : ''}"></span></p>
+    <p>Nacionalidades: <span th:text="${datos.getNacionalidadSeleccionada() != null ? datos.getNacionalidadSeleccionada() : ''}"></span></p>
 
-  <p th:text="${datos.getBancoNombre() != null ? datos.getBancoNombre() : ''}"></p>
-  <p th:text="${datos.getCuentaBancaria() != null ? datos.getCuentaBancaria() : ''}"></p>
+
+  </fieldset>
+
+  <fieldset>
+    <legend>Datos profesionales</legend>
+    <p>Departamento: <span th:text="${datos.getDepartamentoSeleccionado() != null ? datos.getDepartamentoSeleccionado() : ''}"></span></p>
+    <p>Salario: <span th:text="${datos.getSalario() != null ? datos.getSalario() : ''}"></span></p>
+    <p>Comentarios: <span th:text="${datos.getComentarios() != null ? datos.getComentarios() : ''}"></span></p>
+  </fieldset>
+
+  <fieldset>
+    <legend>Datos bancarios</legend>
+    <p>Nombre del banco: <span th:text="${datos.getBancoNombre() != null ? datos.getBancoNombre() : ''}"></span></p>
+    <p>Cuenta bancaria: <span th:text="${datos.getCuentaBancaria() != null ? datos.getCuentaBancaria() : ''}"></span></p>
+  </fieldset>
+
+
+  <a href="/volver-principio">Volver al principio</a>
 </body>
 </html>

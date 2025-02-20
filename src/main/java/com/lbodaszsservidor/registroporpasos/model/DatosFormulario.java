@@ -24,7 +24,7 @@ public class DatosFormulario {
     private List<String> nacionalidadSeleccionada;
 
     // ** PASO 2 - DATOS PROFESIONALES **
-    private String departamento;
+    private String departamentoSeleccionado;
     private double salario;
     private String comentarios;
 

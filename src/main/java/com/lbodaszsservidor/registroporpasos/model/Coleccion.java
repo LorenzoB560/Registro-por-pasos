@@ -7,6 +7,7 @@ import java.util.List;
 public class Coleccion {
     private static List<String> listaGeneros = new ArrayList<>();
     private static List<String> listaNacionalidades = new ArrayList<>();
+    private static List<String> listaDepartamentos = new ArrayList<>();
 
     static {
         listaGeneros.add("Masculino");
@@ -18,6 +19,18 @@ public class Coleccion {
         listaNacionalidades.add("Italiana");
         listaNacionalidades.add("Portugesa");
 
+        listaDepartamentos.add("Marketing");
+        listaDepartamentos.add("Comercio");
+        listaDepartamentos.add("Informática");
+        listaDepartamentos.add("Recursos humanos");
+    }
+
+    public static List<String> getListaDepartamentos() {
+        return listaDepartamentos;
+    }
+
+    public static void setListaDepartamentos(List<String> listaDepartamentos) {
+        Coleccion.listaDepartamentos = listaDepartamentos;
     }
 
     public static List<String> getListaGeneros() {

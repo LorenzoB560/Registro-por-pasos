@@ -23,18 +23,25 @@
     <form action="/guardar-datos-profesionales" method="POST" th:object="${datosFormulario}">
         <fieldset>
             <legend>Datos profesionales</legend>
-            <label for="Departamento">Departamento</label>
 
-            <select name="Departamento" id="Departamento">
-                <option value="marketing" th:selected="${datos.getDepartamento() != null and datos.getDepartamento() == 'marketing'}">Marketing</option>
-                <option value="ecommerce" th:selected="${datos.getDepartamento() != null and datos.getDepartamento() == 'ecommerce'}">Ecommerce</option>
+            <label for="departamentoSeleccionado">Nacionalidad</label>
+            <select name="departamentoSeleccionado" id="departamentoSeleccionado">
+                <option th:each="departamento: ${listaDepartamentos}"
+                        th:value="${departamento}"
+                        th:text="${departamento}"
+                        th:selected="${datos.getDepartamentoSeleccionado() != null
+                        and datos.getDepartamentoSeleccionado().contains(departamento)}"
+                ></option>
             </select>
-
 
             <label for="salario">Salario</label>
             <input type="text" name="salario" id="salario"
                    th:value="${datos.getSalario() != null ? datos.getSalario() : ''}">
 
+            <label for="comentarios">Comentarios</label>
+            <textarea name="comentarios" id="comentarios">
+                <th:block th:text="${datos.getComentarios != null ? datos.getComentarios() : ''}"></th:block>
+            </textarea>
 
             <input type="submit" value="Enviar">
         </fieldset>

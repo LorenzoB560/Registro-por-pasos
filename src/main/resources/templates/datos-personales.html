@@ -34,9 +34,9 @@
 
         <label for="fechaNacimiento">Fecha de nacimiento</label>
         <input type="text" name="fechaNacimiento" id="fechaNacimiento"
-               th:value="${datos.getFechaNacimiento() != null ? datos.getFechaNacimiento() : ''}"></input>
+               th:value="${datos.getFechaNacimiento() != null ? datos.getFechaNacimiento() : ''}"></input> <br>
 
-          Género
+          <span>Género</span>
           <div th:each="genero: ${listaGeneros}">
               <input type="radio" name="generoSeleccionado"
                      th:checked="${genero == datos.getGeneroSeleccionado()}"
