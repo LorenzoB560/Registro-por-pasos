@@ -1,11 +1,14 @@
 package com.lbodaszsservidor.registroporpasos.controller;
 
+import com.lbodaszsservidor.registroporpasos.grupos.GrupoPersonal;
 import com.lbodaszsservidor.registroporpasos.model.Coleccion;
 import com.lbodaszsservidor.registroporpasos.model.DatosFormulario;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,26 +32,42 @@ public class PrincipalController {
 
         // Si no existe, creo el objeto de datos formulario y su sesión respectivamente.
         if(datosFormulario == null) {
-            System.out.println("No sesión datos personales");
             datosFormulario = new DatosFormulario();
             sesion.setAttribute("datos", datosFormulario);
         }
 
         //Lo añado al modelo
+
+
+
         model.addAttribute("datos", datosFormulario);
-        System.out.println(sesion.getAttribute("datos"));
 
         return "datos-personales";
     }
     @PostMapping("/guardar-datos-personales")
-    public String guardarDatosPersonales(@ModelAttribute DatosFormulario datosFormulario, HttpSession sesion) {
-        DatosFormulario datosAnteriores = (DatosFormulario) sesion.getAttribute("datos");
+    public String guardarDatosPersonales(
+            @Validated(GrupoPersonal.class) @ModelAttribute("datos") DatosFormulario datosFormulario,
+            BindingResult bindingResult,
+            HttpSession sesion,
+            Model model) {
 
-        actualizarDatos(datosAnteriores, datosFormulario);
+        // Si hay errores, volver a la misma página
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("datos", datosFormulario);
+            return "datos-personales";
+        }
+
+        DatosFormulario datosAnteriores = (DatosFormulario) sesion.getAttribute("datos");
+        if (datosAnteriores != null) {
+            actualizarDatos(datosAnteriores, datosFormulario);
+        } else {
+            datosAnteriores = datosFormulario;
+        }
 
         sesion.setAttribute("datos", datosAnteriores);
         return "redirect:/datos-profesionales";
     }
+
 
     @GetMapping("/datos-profesionales")
     public String datosProfesionales(HttpSession sesion, Model model) {
@@ -56,7 +75,6 @@ public class PrincipalController {
         DatosFormulario datosFormulario = (DatosFormulario) sesion.getAttribute("datos");
         System.out.println(datosFormulario);
         if(datosFormulario == null) {
-            System.out.println("No sesión datos profesionales");
             datosFormulario = new DatosFormulario();
             sesion.setAttribute("datos", datosFormulario);
         }
@@ -79,9 +97,7 @@ public class PrincipalController {
     public String datosBancarios(HttpSession sesion, Model model) {
 
         DatosFormulario datosFormulario = (DatosFormulario) sesion.getAttribute("datos");
-        System.out.println(datosFormulario);
         if(datosFormulario == null) {
-            System.out.println("No sesión datos bancarios");
             datosFormulario = new DatosFormulario();
             sesion.setAttribute("datos", datosFormulario);
         }
@@ -104,12 +120,10 @@ public class PrincipalController {
         DatosFormulario datosFormulario = (DatosFormulario) sesion.getAttribute("datos");
 
         if (datosFormulario == null) {
-            System.out.println("No sesión resumen");
             datosFormulario = new DatosFormulario();
         }
 
         model.addAttribute("datos", datosFormulario);
-        System.out.println(sesion.getAttribute("datos"));
         return "resumen";
     }
 

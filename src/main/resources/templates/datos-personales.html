@@ -20,7 +20,9 @@
         <img src="/img/checkered-flag-icon.png" alt="Paso 4"></img>
       </a>
 
-    <form action="/guardar-datos-personales" method="POST" th:object="${datosFormulario}">
+
+
+    <form action="/guardar-datos-personales" method="POST" th:object="${datos}">
       <fieldset>
         <legend>Datos personales</legend>
         <label for="nombre">Nombre</label>
@@ -54,6 +56,10 @@
                        and datos.getNacionalidadSeleccionada().contains(nacionalidad)}"
               ></option>
           </select>
+
+          <span th:if="${#fields.hasErrors('nacionalidadSeleccionada')}" th:errors="*{nacionalidadSeleccionada}" class="error"></span>
+
+
           <button type="submit">Grabar información e ir al paso 2 - Datos profesionales</button>
       </fieldset>
 
