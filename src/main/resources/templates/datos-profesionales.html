@@ -20,22 +20,22 @@
         <img src="/img/checkered-flag-icon.png" alt="Paso 4"></img>
     </a>
 
-    <form action="/guardar-datos-bancarios" method="POST" th:object="${datosFormulario}">
+    <form action="/guardar-datos-profesionales" method="POST" th:object="${datosFormulario}">
         <fieldset>
             <legend>Datos profesionales</legend>
             <label for="Departamento">Departamento</label>
 
 
             <select name="Departamento" id="Departamento">
-                <option value="" th:selected="${session.profesionales == null or session.profesionales.departamento == null}"></option>
-                <option value="marketing" th:selected="${session.profesionales != null and session.profesionales.departamento == 'marketing'}">Marketing</option>
-                <option value="ecommerce" th:selected="${session.profesionales != null and session.profesionales.departamento == 'ecommerce'}">Ecommerce</option>
+                <option value="" th:selected="${datos.getDepartamento() == null}"></option>
+                <option value="marketing" th:selected="${datos.getDepartamento() != null and datos.getDepartamento() == 'marketing'}">Marketing</option>
+                <option value="ecommerce" th:selected="${datos.getDepartamento() != null and datos.getDepartamento() == 'ecommerce'}">Ecommerce</option>
             </select>
 
 
             <label for="salario">Salario</label>
-            <input type="number" name="salario" id="salario"
-                   th:value="${session.profesionales != null ? session.profesionales.getSalario() : ''}">
+            <input type="text" name="salario" id="salario"
+                   th:value="${datos.getSalario() != null ? datos.getSalario() : ''}">
 
 
             <input type="submit" value="Enviar">

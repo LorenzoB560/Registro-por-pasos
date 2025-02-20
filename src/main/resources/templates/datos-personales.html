@@ -20,17 +20,17 @@
         <img src="/img/checkered-flag-icon.png" alt="Paso 4"></img>
       </a>
 
-    <form action="/guardar-datos-profesionales" method="POST" th:object="${datosFormulario}">
+    <form action="/guardar-datos-personales" method="POST" th:object="${datosFormulario}">
       <fieldset>
         <legend>Datos personales</legend>
         <label for="nombre">Nombre</label>
 
 
           <input type="text" name="nombre" id="nombre"
-                 th:value="${personales.getNombre() != null ? personales.getNombre() : ''}">
+                 th:value="${datos.getNombre() != null ? datos.getNombre() : ''}">
         <label for="apellido">Apellido</label>
         <input type="text" name="apellido" id="apellido"
-               th:value="${personales.getApellido() != null ? personales.getApellido() : ''}">
+               th:value="${datos.getApellido() != null ? datos.getApellido() : ''}">
 
         <!--
         <label for="fechaNac">Fecha de nacimiento</label>

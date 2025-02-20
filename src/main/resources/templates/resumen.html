@@ -20,7 +20,8 @@
     <img src="/img/checkered-flag-icon.png" alt="Paso 4"></img>
   </a>
 
-
-  Hola mundo
+  <p th:text="${datos.getNombre() != null ? datos.getNombre() : ''}"></p>
+  <p th:text="${datos.getBancoNombre() != null ? datos.getBancoNombre() : ''}"></p>
+  <p th:text="${datos.getCuentaBancaria() != null ? datos.getCuentaBancaria() : ''}"></p>
 </body>
 </html>

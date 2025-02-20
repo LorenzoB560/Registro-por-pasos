@@ -19,12 +19,22 @@
     <a href="/resumen" id="resumen">
         <img src="/img/checkered-flag-icon.png" alt="Paso 4"></img>
     </a>
-    <form>
+    <form action="/guardar-datos-bancarios" method="POST" th:object="${datosFormulario}">
         <fieldset>
             <legend>Datos bancarios</legend>
-            <label for="cuenta">Cuenta corriente</label>
-            <input type="text" name="cuenta" id="cuenta"></input>
+
+            <label for="bancoNombre">Nombre del banco</label>
+            <input type="text" name="bancoNombre" id="bancoNombre"
+                   th:value="${datos.getBancoNombre() != null ? datos.getBancoNombre() : ''}">
+
+            <label for="cuentaBancaria">Cuenta corriente</label>
+            <input type="text" name="cuentaBancaria" id="cuentaBancaria"
+                   th:value="${datos.getCuentaBancaria() != null ? datos.getCuentaBancaria() : ''}"></input>
+
+
+        <input type="submit" value="Guardar"></input>
         </fieldset>
+
     </form>
 </body>
 </html>
