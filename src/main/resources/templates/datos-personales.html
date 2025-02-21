@@ -45,11 +45,13 @@
           <div th:each="error : ${#fields.errors('fechaNacimiento')}" th:text="${error}" class="error"></div>
 
           <span>Género</span>
-          <div th:each="genero: ${listaGeneros}">
-              <input type="radio" name="generoSeleccionado"
-                     th:checked="${genero == datos.getGeneroSeleccionado()}"
-                     th:value="${genero}" th:id="${genero}" />
-              <label th:for="${genero}" th:text="${genero}"></label>
+          <div class="genero-group">
+              <div class="genero-container" th:each="genero: ${listaGeneros}">
+                  <input type="radio" name="generoSeleccionado"
+                         th:checked="${genero == datos.getGeneroSeleccionado()}"
+                         th:value="${genero}" th:id="${genero}" />
+                  <label th:for="${genero}" th:text="${genero}"></label>
+              </div>
           </div>
 
 

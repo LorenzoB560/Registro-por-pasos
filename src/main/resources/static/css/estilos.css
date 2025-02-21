@@ -1,30 +1,151 @@
-a img{
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
 
+/* Navegación */
+a {
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px;
+}
+
+a img {
     width: 50px;
     height: auto;
     opacity: 0.5;
-}
-#body-personales a img,
-#body-profesionales a img,
-#body-bancarios a img,
-#body-resumen a img {
-    opacity: 0.5; /* Reafirmamos la opacidad por defecto */
+    transition: opacity 0.3s;
+    display: block; /* Evita el icono del enlace */
+    margin: auto;
 }
 
-#body-personales #datos-personales img {
-    opacity: 1;
-}
-#body-profesionales #datos-profesionales img {
-    opacity: 1;
-}
-#body-bancarios #datos-bancarios img {
-    opacity: 1;
-}
+#body-personales #datos-personales img,
+#body-profesionales #datos-profesionales img,
+#body-bancarios #datos-bancarios img,
 #body-resumen #resumen img {
     opacity: 1;
 }
 
-.error{
+/* Formularios */
+form {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: left;
+}
+
+fieldset {
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+legend {
+    font-weight: bold;
+    color: #007bff;
+    font-size: 1.2em;
+}
+
+/* Inputs */
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input, select, textarea {
+    width: calc(100% - 20px);
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+/* Botón */
+button, input[type="submit"] {
+    background: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+    width: 100%;
+    font-size: 1em;
+}
+
+button:hover, input[type="submit"]:hover {
+    background: #0056b3;
+}
+
+/* Mensajes de error */
+.error {
     color: red;
     font-weight: bold;
+    margin-top: 5px;
+}
+
+/* Estilo del resumen */
+#body-resumen fieldset {
+    background: white;
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: left;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+fieldset p {
+    font-size: 1em;
+    margin: 8px 0;
+    padding: 5px;
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+
+/* Enlace "Volver al principio" */
+a[href="/volver-principio"] {
+    display: block;
+    width: 200px;
+    margin: 30px auto;
+    padding: 12px;
+    background: #28a745;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    font-size: 1.1em;
+}
+
+a[href="/volver-principio"]:hover {
+    background: #218838;
+}
+
+/* Género */
+.genero-group {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    align-items: center;
+}
+
+.genero-container {
+    text-align: center;
+}
+
+.genero-container label {
+    display: block;
+    margin-top: 5px;
 }
