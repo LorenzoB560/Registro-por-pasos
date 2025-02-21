@@ -1,6 +1,6 @@
 package com.lbodaszsservidor.registroporpasos.controller;
 
-import com.lbodaszsservidor.registroporpasos.grupos.GrupoPersonal;
+
 import com.lbodaszsservidor.registroporpasos.model.Coleccion;
 import com.lbodaszsservidor.registroporpasos.model.DatosFormulario;
 import jakarta.servlet.http.HttpServletRequest;
@@ -37,16 +37,13 @@ public class PrincipalController {
         }
 
         //Lo añado al modelo
-
-
-
         model.addAttribute("datos", datosFormulario);
 
         return "datos-personales";
     }
     @PostMapping("/guardar-datos-personales")
     public String guardarDatosPersonales(
-            @Validated(GrupoPersonal.class) @ModelAttribute("datos") DatosFormulario datosFormulario,
+            @Validated(DatosFormulario.GrupoPersonal.class) @ModelAttribute("datos") DatosFormulario datosFormulario,
             BindingResult bindingResult,
             HttpSession sesion,
             Model model) {
@@ -54,6 +51,7 @@ public class PrincipalController {
         // Si hay errores, volver a la misma página
         if (bindingResult.hasErrors()) {
             model.addAttribute("datos", datosFormulario);
+            model.addAttribute("mensajeNOK", "El formulario tiene errores");
             return "datos-personales";
         }
 
@@ -73,7 +71,6 @@ public class PrincipalController {
     public String datosProfesionales(HttpSession sesion, Model model) {
 
         DatosFormulario datosFormulario = (DatosFormulario) sesion.getAttribute("datos");
-        System.out.println(datosFormulario);
         if(datosFormulario == null) {
             datosFormulario = new DatosFormulario();
             sesion.setAttribute("datos", datosFormulario);
@@ -82,7 +79,18 @@ public class PrincipalController {
         return "datos-profesionales";
     }
     @PostMapping("/guardar-datos-profesionales")
-    public String guardarDatosProfesionales(@ModelAttribute DatosFormulario datosFormulario, HttpSession sesion) {
+    public String guardarDatosProfesionales(
+            @Validated(DatosFormulario.GrupoProfesional.class) @ModelAttribute("datos") DatosFormulario datosFormulario,
+            BindingResult bindingResult,
+            HttpSession sesion,
+            Model model) {
+
+        // Si hay errores, volver a la misma página
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("datos", datosFormulario);
+            model.addAttribute("mensajeNOK", "El formulario tiene errores");
+            return "datos-profesionales";
+        }
 
         DatosFormulario datosAnteriores = (DatosFormulario) sesion.getAttribute("datos");
 
@@ -105,7 +113,18 @@ public class PrincipalController {
         return "datos-bancarios";
     }
     @PostMapping("/guardar-datos-bancarios")
-    public String guardarDatosBancarios(@ModelAttribute DatosFormulario datosFormulario, HttpSession sesion) {
+    public String guardarDatosBancarios(
+            @Validated(DatosFormulario.GrupoBancario.class) @ModelAttribute("datos") DatosFormulario datosFormulario,
+            BindingResult bindingResult,
+            HttpSession sesion,
+            Model model) {
+
+        // Si hay errores, volver a la misma página
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("datos", datosFormulario);
+            model.addAttribute("mensajeNOK", "El formulario tiene errores");
+            return "datos-bancarios";
+        }
 
         DatosFormulario datosAnteriores = (DatosFormulario) sesion.getAttribute("datos");
 
@@ -157,7 +176,7 @@ public class PrincipalController {
 
         // Datos bancarios
         sesionVieja.setBancoNombre(sesionNueva.getBancoNombre() != null ? sesionNueva.getBancoNombre() : sesionVieja.getBancoNombre());
-        sesionVieja.setCuentaBancaria(sesionNueva.getCuentaBancaria() > 0 ? sesionNueva.getCuentaBancaria() : sesionVieja.getCuentaBancaria());
+        sesionVieja.setCuentaBancaria(sesionNueva.getCuentaBancaria() != null ? sesionNueva.getCuentaBancaria() : sesionVieja.getCuentaBancaria());
     }
 
 }

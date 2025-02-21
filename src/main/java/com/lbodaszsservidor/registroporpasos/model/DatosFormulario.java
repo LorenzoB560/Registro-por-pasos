@@ -1,7 +1,7 @@
 package com.lbodaszsservidor.registroporpasos.model;
 
 
-import com.lbodaszsservidor.registroporpasos.grupos.GrupoProfesional;
+
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -38,6 +37,8 @@ public class DatosFormulario {
     @Size(min = 2, message = "Debes seleccionar al menos dos nacionalidades.", groups = GrupoPersonal.class)
     private List<String> nacionalidadSeleccionada;
 
+
+    public interface GrupoProfesional {}
     // ** PASO 2 - DATOS PROFESIONALES **
     private String departamentoSeleccionado;
 
@@ -46,9 +47,13 @@ public class DatosFormulario {
     private double salario;
     private String comentarios;
 
+    public interface GrupoBancario {}
     // ** PASO 3 - DATOS BANCARIOS **
     private String bancoNombre;
-    private int cuentaBancaria;
+
+    @NotNull(message = "La cuenta bancaria no debe estar vacía", groups = GrupoBancario.class)
+    @Size(min = 20, max = 20, message = "La cuenta bancaria debe tener 20 dígitos", groups = GrupoBancario.class)
+    private String cuentaBancaria;
 
 
 }

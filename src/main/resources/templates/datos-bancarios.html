@@ -19,7 +19,10 @@
     <a href="/resumen" id="resumen">
         <img src="/img/checkered-flag-icon.png" alt="Paso 4"></img>
     </a>
-    <form action="/guardar-datos-bancarios" method="POST" th:object="${datosFormulario}">
+
+    <h2 th:text="*{mensajeNOK}" class="error"></h2>
+
+    <form action="/guardar-datos-bancarios" method="POST" th:object="${datos}">
         <fieldset>
             <legend>Datos bancarios</legend>
 
@@ -31,6 +34,7 @@
             <input type="text" name="cuentaBancaria" id="cuentaBancaria"
                    th:value="${datos.getCuentaBancaria() != null ? datos.getCuentaBancaria() : ''}"></input>
 
+            <div th:each="error : ${#fields.errors('cuentaBancaria')}" th:text="${error}" class="error"></div>
 
         <input type="submit" value="Guardar"></input>
         </fieldset>

@@ -20,7 +20,9 @@
         <img src="/img/checkered-flag-icon.png" alt="Paso 4"></img>
     </a>
 
-    <form action="/guardar-datos-profesionales" method="POST" th:object="${datosFormulario}">
+    <h2 th:text="*{mensajeNOK}" class="error"></h2>
+
+    <form action="/guardar-datos-profesionales" method="POST" th:object="${datos}">
         <fieldset>
             <legend>Datos profesionales</legend>
 
@@ -37,6 +39,8 @@
             <label for="salario">Salario</label>
             <input type="text" name="salario" id="salario"
                    th:value="${datos.getSalario() != null ? datos.getSalario() : ''}">
+
+            <div th:each="error : ${#fields.errors('salario')}" th:text="${error}" class="error"></div>
 
             <label for="comentarios">Comentarios</label>
             <textarea name="comentarios" id="comentarios">
