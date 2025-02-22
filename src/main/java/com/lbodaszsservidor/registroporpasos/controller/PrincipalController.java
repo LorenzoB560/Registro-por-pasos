@@ -146,7 +146,7 @@ public class PrincipalController {
         return "resumen";
     }
 
-    @GetMapping("volver-principio")
+    @GetMapping("/volver-principio")
     public String volverPrincipio(HttpSession sesion, Model model) {
         sesion.invalidate();
         return "redirect:/datos-personales";
